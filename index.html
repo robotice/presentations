@@ -104,9 +104,32 @@
                         <li>Robotie like Linux - Ubuntu, Arch</li>
                     </ul><br>
 				</section>
+
+				<section>
+					<h2>Project Structure</h2>
+					<ul>
+                        <li>Robotice Daemon - Python, Celery, ..</li>
+                        <li>Robotice Control - Django model, API</li>
+                        <li>Robotice Dashboard - Horizon(Django) extension</li>
+                        <li>Boardie Dashboard - Django, Angular</li>
+                        <li>Robotie Android client</li>
+                        <li>Robotie Mind - planned</li>
+                    </ul><br>
+				</section>
+
 				<section>
 					<h3>Architecture</h3>
 						<img width="622" height="700" src="img/architecture_layers.png" alt="Architecture">
+				</section>
+
+				<section>
+					<h3>Example - distributed</h3>
+						<img width="820" height="458" src="img/main_diagram.png" alt="Robotice Main Diagram Inteligent Home">
+				</section>
+
+				<section>
+					<h3>EXAMPLE - ALL IN ONE</h3>
+						<img src="img/all_in_one.png" alt="Robotice All in one">
 				</section>
 
 				<section>
@@ -153,6 +176,39 @@
                     </div>
                 </section>
 
+				<section>
+                    <h2>Use Case - turn on / off (anything)</h2>
+                    <div>
+                        <ul>
+                            <code>
+                            	a = {device: sispm, port: 0, socket: 3}<br>
+                            	<br>
+                            	
+                            	real_value = 0<br>
+                            	model_value = 1<br>
+                            	<br>
+								
+								r.send_task('reactor.commit_action',<br>
+									args=(a, real_value, model_value),<br>
+									queue = 'kitchen01', <br>
+									exchange = 'box03').wait(10)
+								
+                            </code>
+                        </ul>
+                    </div>
+                </section>
+
+				<section>
+                    <h2>Robotice Mind</h2>
+                    <div>
+                        <ul>
+                        	<li>Processing</li>
+                        	<li>Analyzing</li>
+                        	<li>Reasoning</li>
+                        	<li>Tunning</li>
+                        </ul>
+                    </div>
+                </section>
 
 				<section>
                     <h2>Links</h2>
