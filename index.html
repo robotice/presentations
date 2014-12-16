@@ -21,16 +21,17 @@
 		<!-- For syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
-		<script>
-			if( window.location.search.match( /print-pdf/gi ) ) {
-				var link = document.createElement( 'link' );
-				link.rel = 'stylesheet';
-				link.type = 'text/css';
-				link.href = 'css/print/pdf.css';
-				document.getElementsByTagName( 'head' )[0].appendChild( link );
-			}
-		</script>
+
+        <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+        <script>
+            if( window.location.search.match( /print-pdf/gi ) ) {
+                var link = document.createElement( 'link' );
+                link.rel = 'stylesheet';
+                link.type = 'text/css';
+                link.href = 'css/print/pdf.css';
+                document.getElementsByTagName( 'head' )[0].appendChild( link );
+            }
+        </script>
 
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
@@ -48,15 +49,17 @@
 						<p>	
 							</br></br>
 							<h4>THE NEXT-GEN MONITORING AND REACTING PLATFORM</h4>
-							</br>
+                            <h4>Inteligent grow control application</h4>
 						</p>
+                        <br/>
+                        <br/>
+                        <h3>Michael Kutý, Jakub Josef</h3>
 				</section>
-
+                <section>
 				<section>
 					<h2>What is Robotice ?</h2>
 					<blockquote>Robotice software controls large pools of single-board computers, sensors, and other
 						devices throughout a locations, managed through a dashboard or via the Robotice API.
-						Robotice works with popular open source technologies making it ideal for heterogeneous infrastructure.
 					</blockquote>
 				</section>
 
@@ -71,16 +74,6 @@
 						<li>100% open source</li>
 					</ul>
 				</section>
-				<section>
-					<h2>PHILOSOPHY</h2>
-					<ul>
-						<li>Asynchronous by nature</li>
-						<li>High-Performing</li>
-						<li>Slim and lightweight core</li>
-						<li>Integrates with modern technologies</li>
-						<li>Easily extendable</li>
-					</ul>
-				</section>
 
 				<section>
                     <h2>Supported metrics and devices</h2>
@@ -90,138 +83,229 @@
                             <li>Luminosity / Lux / Light - TSL, CDS</li>
                             <li>Turn on / off - relay, Sispm, ..</li>
                             <li>Liquid Flow, Current Sensor</li>
+                            <li>NDVI - Normalized difference vegetation index</li>
                         </ul>
                     </div>
                 </section>
-
-				<section>
-					<h2>Core</h2>
-					<ul>
-                        <li>Written in Python</li>
-                        <li>Uses Celery</li>
-                        <li>Graphite for metrics</li>
-                        <li>Boardie dashboard for visualization</li>
-                        <li>Robotie like Linux - Ubuntu, Arch</li>
-                    </ul><br>
-				</section>
-
-				<section>
-					<h2>Project Structure</h2>
-					<ul>
-                        <li>Robotice Daemon - Python, Celery, ..</li>
-                        <li>Robotice Control - Django model, API</li>
-                        <li>Robotice Dashboard - Horizon(Django) extension</li>
-                        <li>Boardie Dashboard - Django, Angular</li>
-                        <li>Robotie Android client</li>
-                        <li>Robotie Mind - planned</li>
-                    </ul><br>
-				</section>
-
-				<section>
-					<h3>Architecture</h3>
-
-				</section>
-				<section>
-					<img width="64%" height="74%" src="img/architecture_layers.png" alt="Architecture">
-
-				</section>
-
-				<section>
-					<h3>Example - distributed</h3>
-						<img width="820" height="458" src="img/main_diagram.png" alt="Robotice Main Diagram Inteligent Home">
-				</section>
-
-				<section>
-					<h3>EXAMPLE - ALL IN ONE</h3>
-						<img src="img/all_in_one.png" alt="Robotice All in one">
-				</section>
-
-				<section>
-                    <h2>Use Case - Smart Home</h2>
+                <section>
+                    <h2>Use Case: Grow control</h2>
                     <div>
+                        Goal: to create automated solution to support plant growth <br/><br/>
                         <ul>
-                            <li>Plan - hold temperature among 20°C - 30°C between 6 AM and 10 PM </li>
-                            <br>
-                            <code>
-         					    cycle: 24h<br>
-								home_temperature: <br>
-								&nbsp  cycles:<br>
-								&nbsp  - start: 6:00:00<br>
-								&nbsp&nbsp&nbsp    end: 22:00:00<br>
-								&nbsp&nbsp&nbsp    low: 20<br>
-							    &nbsp&nbsp&nbsp    high: 30<br>
-                            </code>
+                            <li>Normalized Difference Vegetation Index (NDVI camera)</li>
+                            <li>Air / Soil Humidity sensor</li>
+                            <li>Watering and fertilization control</li>
+                            <li>Lighting control</li>
                         </ul>
                     </div>
                 </section>
+                <section>
+                    <h2>NDVI</h2>
+                    The Normalized Difference Vegetation Index (NDVI) is a simple graphical indicator that can be used to analyze remote sensing measurements.<br/>
+                    <img style="background-color:white;" src="img/ndvi.png"/><br/>
+                    Near InfraRed light (from 0.7 to 1.1 µm)<br/>
+                    Visible light (from 0.4 to 0.7 µm)
+                </section>
+                <section>
+                    <img height="550" src="img/ndvi_example.jpg"/>
+                </section>
+                <section>
+                    <img height="550" src="img/NDVI_space.png"/>
+                </section>
+                <section>
+                    <h2>Flower</h2>
+                    <img height="550" src="img/flower.jpg"/>
+                </section>
+                <section>
+                    <h2>NDVI Flower</h2>
+                    <img height="550" src="img/ndvi_flower.jpg"/>
+                </section>
+                <section>
+                    NDVI Image Data Processing
+                    <ul>
+                        <li>
+                        1) Flower detection by whitebased edge detection
+                        </li>
+                    </ul>
+                    <img height="550" src="img/NDVI_edges.jpg">
+                </section>
+                <section>
+                    Camera image data processing
+                    <ul>
+                        <li>
+                        1) Flower detection by whitebased edge detection
+                        </li>
+                        <li>
+                        2) NDVI filters
+                        </li>
+                    </ul>
+                     <img src="img/NDVI_health.jpg">
+                </section>
+                <section>
+                    Camera image data processing
+                    <ul>
+                    <li>
+                        1) Flower detection by 
+                        whitebased edge detection
+                    </li>
+                    <li>
+                        2) NDVI filters
+                    </li>
+                    <li>
+                        3) Fuzzyfication
+                    </li>
+                </section>
+                <section>
+                    <h2>Heatlh flower</h2>
+                        <h3>NDVI = 0.81</h3>
+                        <img height="500" src="img/NDVI_health.jpg">
+                </section>
+                <section>
+                    <h2>Withered flower</h2>
+                    <h3>NDVI = 0.37</h3>
+                    <img height="500" src="img/NDVI_bad.jpg">
+                </section>
+                <section>
+                    <h2>Implementation</h2>
+                        <ul>
+                            <li>Change workflow in the compare_data (Planner, Reasoner)</li>
+                            <li>FCL - Fuzzy Control Language (load, use)</li>
+                        </ul>
+                    <div>
+                    </div>
+                </section>
+
+
+                <section>
+                    <h2>Architecture</h2>
+                    <img height="500" src="img/architecture_layers.png">
+                </section>
+
+                <section>
+                <h2>Flower Index</h2>
+                    <pre>
+VAR_INPUT
+    ndvi:             REAL;
+    air_humidity:     REAL;
+    soil_humidity:    REAL;
+    temperature:      REAL;
+END_VAR
+
+VAR_OUTPUT
+    flower_index:     REAL; (* RANGE(0 .. 100) *)
+END_VAR
+
+FUZZIFY ndvi
+    TERM Poor := (-0.1, 1) ;
+    TERM Excellent := (0.4, 1) (1, 0) ;
+END_FUZZIFY
+
+DEFUZZIFY flower_index
+    TERM Excellent := 100 ;
+    ...
+END_DEFUZZIFY
+
+RULEBLOCK flower_index
+    RULE 0: IF (ndvi IS Excellent) AND (temperature IS Excellent) AND (soil_humidity IS Excellent) THEN (flower_index IS Excellent);
+END_RULEBLOCK
+                    </pre>
+                </section>
+
+                <section>
+                    <h2>Python code</h2>
+                    <pre>
+
+import fuzzy.storage.fcl.Reader
+
+system = fuzzy.storage.fcl.Reader.Reader().load_from_file("./flower-index.fcl")
+
+input = {
+    "ndvi": 0.5,
+    "temperature": 25,
+    "air_humidity": 50,
+    "soil_humidity": 50
+}
+output = {
+    "flower_index": 0
+}
+
+system.calculate(input, output)
+
+print output["action"]
+                    </pre>
+                </section>
+
+                <section>
+                <h2>Basic Action</h2>
+                    <pre>
+VAR_INPUT
+    air_humidity:     REAL; (* RANGE(0 .. 100) *)
+    temperature:      REAL; (* RANGE(0 .. 100) *)
+END_VAR
+
+VAR_OUTPUT
+    action:    REAL; (* RANGE(0 .. 1) *)
+END_VAR
+</pre>
+                </section>
 
 				<section>
-                    <h2>Why Yaml ?</h2>
+                    <h2>plan - NOW - Yaml</h2>
                     <div>
                         <ul>
                             <code>
-								my_standard_working_day: <br>
-								&nbsp  start: 6:00:00<br>
-								&nbsp    end: 22:00:00<br>
+                                growing_cycle: <br>
+                                &nbsp  start: 6:00:00<br>
+                                &nbsp    end: 24:00:00<br>
                             
-								<br>
-								....<br>
-								<br>
+                                <br>
+                                ....<br>
+                                <br>
 
-								temperature_in_living_room: <br>
-								&nbsp cycles:<br>
-								&nbsp - start: ${my_standard_working_day:start}<br>
-								&nbsp&nbsp&nbsp    end: ${my_standard_working_day:end}<br>
-								&nbsp&nbsp&nbsp low: 20<br>
-								&nbsp&nbsp&nbsp high: 30
-
+                                basic_growing_plan: <br>
+                                &nbsp cycles:<br>
+                                &nbsp - start: ${growing_cycle:start}<br>
+                                &nbsp&nbsp&nbsp    end: ${growing_cycle:end}<br>
+                                &nbsp&nbsp&nbsp value: 1<br>
                             </code>
                         </ul>
                     </div>
                 </section>
 
-				<section>
-                    <h2>Use Case - turn on / off (anything)</h2>
+                <section>
+                    <h2>plan - FUTURE</h2>
                     <div>
                         <ul>
                             <code>
-                            	a = {device: sispm, port: 0, socket: 3}<br>
-                            	<br>
-                            	
-                            	real_value = 0<br>
-                            	model_value = 1<br>
-                            	<br>
-								
-								r.send_task('reactor.commit_action',<br>
-									args=(a, real_value, model_value),<br>
-									queue = 'kitchen01', <br>
-									exchange = 'box03').wait(10)
-								
+                                basic_growing_plan: <br>
+                                &nbsp cycles:<br>
+                                &nbsp - start: ${growing_cycle:start}<br>
+                                &nbsp&nbsp&nbsp    end: ${growing_cycle:end}<br>
+                                &nbsp&nbsp&nbsp <strong>fuzzy: light-action </strong><br>
                             </code>
                         </ul>
                     </div>
                 </section>
 
-				<section>
-                    <h2>Robotice Mind</h2>
+                <section>
+                    <h2>FAN Action - example</h2>
                     <div>
                         <ul>
-                        	<li>Processing</li>
-                        	<li>Analyzing</li>
-                        	<li>Reasoning</li>
-                        	<li>Tunning</li>
+                            <code>
+                                basic_growing_plan: <br>
+                                &nbsp cycles:<br>
+                                &nbsp - start: ${growing_cycle:start}<br>
+                                &nbsp&nbsp&nbsp    end: ${growing_cycle:end}<br>
+                                &nbsp&nbsp&nbsp low: 20<br>
+                                &nbsp&nbsp&nbsp high: 30<br>
+                                &nbsp&nbsp&nbsp...<br>
+                                &nbsp&nbsp&nbsp <strong>fuzzy: fan-action</strong><br>
+                            </code>
                         </ul>
                     </div>
                 </section>
 
-				<section>
-                    <h2>Robotice Mind</h2>
-                    <div>
-						<img width="343" height="306" src="img/mind_layers.png" alt="Robotice Mind">
-                    </div>
-                </section>
-
-				<section>
+                <section>
                     <h2>Links</h2>
                     <div>
                         <ul>
@@ -231,19 +315,6 @@
                         </ul>
                     </div>
                 </section>
-
-
-				<section>
-                    <h2>robotice needs you !</h2>
-                    <div>
-                        <ul>
-                            <li>Check for open issues or open a fresh issue to start a discussion around a feature idea or a bug.</li>
-                            <li>Fork https://github.com/robotice/robotice on GitHub to start making your changes to the develop branch.</li>
-                            <li>Send a pull request</li>
-                        </ul>
-                    </div>
-                </section>
-
 			</div>
 
 		</div>
