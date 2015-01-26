@@ -95,12 +95,12 @@
                 </section>
 
 				<section>
-					<h2>Core</h2>
+					<h2>INTERNALS</h2>
 					<ul>
                         <li>Written in Python</li>
                         <li>Uses Celery</li>
                         <li>Graphite for metrics</li>
-                        <li>Boardie dashboard for visualization</li>
+                        <li>Openstack Horizon Plugin (dashboard)</li>
                         <li>Robotie like Linux - Ubuntu, Arch</li>
                     </ul><br>
 				</section>
@@ -108,117 +108,107 @@
 				<section>
 					<h2>Project Structure</h2>
 					<ul>
-                        <li>Robotice Daemon - Python, Celery, ..</li>
-                        <li>Robotice Control - Django model, API</li>
-                        <li>Robotice Dashboard - Horizon(Django) extension</li>
-                        <li>Boardie Dashboard - Django, Angular</li>
-                        <li>Robotie Android client</li>
-                        <li>Robotie Mind - planned</li>
+                        <li>Robotice Agent System - Python, Celery, ..</li>
+                        <li>Robotice Control System - Django model, API</li>
+                        <li>Robotice Dashboard - Horizon(Django) plugin, AngularJS, ..</li>
+                        <li>Robotie Mobile Client - hybrid ionic app</li>
                     </ul><br>
 				</section>
 
 				<section>
 					<h3>Architecture</h3>
-
-				</section>
-				<section>
-					<img width="64%" height="74%" src="img/architecture_layers.png" alt="Architecture">
-
+					<img width="600px" height="600px" src="img/arch_agent.png" alt="Architecture">
 				</section>
 
 				<section>
-					<h3>Example - distributed</h3>
-						<img width="820" height="458" src="img/main_diagram.png" alt="Robotice Main Diagram Inteligent Home">
+					<h3>Control System</h3>
+						<img width="820" height="600" src="img/arch_control.png" alt="Robotice Main Diagram Inteligent Home">
 				</section>
 
 				<section>
-					<h3>EXAMPLE - ALL IN ONE</h3>
-						<img src="img/all_in_one.png" alt="Robotice All in one">
+					<h3>Issues</h3>
+					<ul>
+						<li>extendable workflow compare_data</li>
+						<li>fuzzy reasoning logic</li>
+					</ul>
 				</section>
 
 				<section>
-                    <h2>Use Case - Smart Home</h2>
-                    <div>
-                        <ul>
-                            <li>Plan - hold temperature among 20°C - 30°C between 6 AM and 10 PM </li>
-                            <br>
-                            <code>
-         					    cycle: 24h<br>
-								home_temperature: <br>
-								&nbsp  cycles:<br>
-								&nbsp  - start: 6:00:00<br>
-								&nbsp&nbsp&nbsp    end: 22:00:00<br>
-								&nbsp&nbsp&nbsp    low: 20<br>
-							    &nbsp&nbsp&nbsp    high: 30<br>
-                            </code>
-                        </ul>
-                    </div>
-                </section>
+					<h3>Extends Robotice - Design</h3>
+					<ul>
+						<li>Enabling</li>
+						<li>Discovery and Import</li>
+						<li>API Enforcement</li>
+						<li>Invocation</li>
+					</ul>
+				</section>
 
 				<section>
-                    <h2>Why Yaml ?</h2>
-                    <div>
-                        <ul>
-                            <code>
-								my_standard_working_day: <br>
-								&nbsp  start: 6:00:00<br>
-								&nbsp    end: 22:00:00<br>
-                            
-								<br>
-								....<br>
-								<br>
-
-								temperature_in_living_room: <br>
-								&nbsp cycles:<br>
-								&nbsp - start: ${my_standard_working_day:start}<br>
-								&nbsp&nbsp&nbsp    end: ${my_standard_working_day:end}<br>
-								&nbsp&nbsp&nbsp low: 20<br>
-								&nbsp&nbsp&nbsp high: 30
-
-                            </code>
-                        </ul>
-                    </div>
-                </section>
+					<h3>Discovery</h3>
+						<img width="820" height="600" src="img/discovery.jpg" alt="Robotice Main Diagram Inteligent Home">
+				</section>
 
 				<section>
-                    <h2>Use Case - turn on / off (anything)</h2>
-                    <div>
-                        <ul>
-                            <code>
-                            	a = {device: sispm, port: 0, socket: 3}<br>
-                            	<br>
-                            	
-                            	real_value = 0<br>
-                            	model_value = 1<br>
-                            	<br>
-								
-								r.send_task('reactor.commit_action',<br>
-									args=(a, real_value, model_value),<br>
-									queue = 'kitchen01', <br>
-									exchange = 'box03').wait(10)
-								
-                            </code>
-                        </ul>
-                    </div>
-                </section>
+					<h3>Importing</h3>
+						<img width="820" height="600" src="img/importing.jpg" alt="Robotice Main Diagram Inteligent Home">
+				</section>
 
 				<section>
-                    <h2>Robotice Mind</h2>
-                    <div>
-                        <ul>
-                        	<li>Processing</li>
-                        	<li>Analyzing</li>
-                        	<li>Reasoning</li>
-                        	<li>Tunning</li>
-                        </ul>
-                    </div>
+					<h3>Fuzzy</h3>
+				</section>
+
+                <section>
+                <h2>Boiler action</h2>
+                    <pre>
+VAR_INPUT
+    real_value:       REAL; (* RANGE(0 .. 100) *)
+END_VAR
+
+VAR_OUTPUT
+    action:    REAL;
+END_VAR
+
+FUZZIFY real_value
+    TERM Cold := (0, 0) (0, 1) (21, 0) ;
+    TERM Good := (0, 0) (21, 1) (21, 0) ;
+    TERM Hot := (0, 0) (21, 1) (100, 1) ;
+END_FUZZIFY
+
+DEFUZZIFY action
+    TERM on := 1 ;
+    TERM off := 0 ;
+    ACCU:MAX;
+    METHOD: Dict;
+    DEFAULT := 0;
+END_DEFUZZIFY
+
+RULEBLOCK first
+    AND:MIN;
+    RULE 0: IF (real_value IS Cold) THEN (action IS on);
+    RULE 1: IF ((real_value IS Good) OR (real_value IS Hot)) THEN (action IS off);
+END_RULEBLOCK
+                    </pre>
                 </section>
 
-				<section>
-                    <h2>Robotice Mind</h2>
-                    <div>
-						<img width="343" height="306" src="img/mind_layers.png" alt="Robotice Mind">
-                    </div>
+                <section>
+                    <h2>Python code</h2>
+                    <pre>
+
+import fuzzy.storage.fcl.Reader
+
+system = fuzzy.storage.fcl.Reader.Reader().load_from_file("./boiler.fcl")
+
+input = {
+    "real_value": 24,
+}
+output = {
+    "action": 0.0
+}
+
+system.calculate(input, output)
+
+print output["action"]
+                    </pre>
                 </section>
 
 				<section>
